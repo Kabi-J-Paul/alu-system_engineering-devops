@@ -6,6 +6,8 @@ Scripts for the SSH project.
   stored at `~/.ssh/school`, as the `ubuntu` user.
 - `1-create_ssh_key_pair` - creates a 4096-bit RSA key pair named
   `school`, protected by the passphrase `betty`.
+- `2-ssh_config` - SSH client configuration that uses the
+  `~/.ssh/school` key and refuses password authentication.
 
 Run them from this directory:
 

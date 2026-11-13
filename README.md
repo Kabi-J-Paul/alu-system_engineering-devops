@@ -13,6 +13,8 @@ Scripts for the SSH project live in the [`ssh/`](ssh/) directory.
 - `1-create_ssh_key_pair` - creates a 4096-bit RSA key pair named
   `school`, protected by the passphrase `betty`. Running it writes
   `school` and `school.pub` in the current directory.
+- `2-ssh_config` - SSH client configuration that uses the
+  `~/.ssh/school` key and refuses password authentication.
 
 ### Usage
 
