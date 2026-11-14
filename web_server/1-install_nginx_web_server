@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Configure a fresh Ubuntu machine: install nginx and serve Holberton School on port 80
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -y
+apt-get install -y nginx
+printf 'Holberton School for the win!\n' > /var/www/html/index.html
+printf 'Holberton School for the win!\n' > /var/www/html/index.nginx-debian.html
+service nginx restart || {
+	service nginx stop > /dev/null 2>&1
+	sleep 1
+	rm -f /run/nginx.pid
+	service nginx start
+}
