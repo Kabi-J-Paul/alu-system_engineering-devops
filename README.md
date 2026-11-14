@@ -36,6 +36,7 @@ Scripts and pages for the Web server project live in the
   strict host key checking disabled.
 - `1-install_nginx_web_server` - installs nginx on port 80 serving a
   page that contains `Holberton School`.
+- `2-setup_a_domain_name` - the domain name set up for the project.
 - `3-redirection` - configures `/redirect_me` to answer with a 301
   Moved Permanently.
 - `4-not_found_page_404` - configures a custom 404 page containing

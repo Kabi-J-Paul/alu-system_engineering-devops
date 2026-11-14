@@ -8,6 +8,7 @@ that is already configured.
   strict host key checking disabled.
 - `1-install_nginx_web_server` - installs nginx, listens on port 80 and
   serves a page containing `Holberton School`.
+- `2-setup_a_domain_name` - the domain name set up for the project.
 - `3-redirection` - nginx setup with `/redirect_me` answering 301
   Moved Permanently.
 - `4-not_found_page_404` - nginx setup with a custom 404 page
