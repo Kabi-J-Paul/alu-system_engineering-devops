@@ -50,3 +50,21 @@ Scripts and pages for the Web server project live in the
     sudo ./3-redirection
     sudo ./4-not_found_page_404
     ./0-transfer_file page.html 13.135.102.185 ubuntu ~/.ssh/school
+
+## Load balancer
+
+Scripts for the Load balancer project live in the
+[`load_balancer/`](load_balancer/) directory.
+
+### Files
+
+- `0-custom_http_response_header` - installs nginx and makes it send an
+  `X-Served-By` header containing the hostname of the server.
+- `1-install_load_balancer` - installs HAProxy and distributes requests
+  between `web-01` and `web-02` with the roundrobin algorithm.
+
+### Usage
+
+    cd load_balancer
+    sudo ./0-custom_http_response_header   # run as root on web-01 and web-02
+    sudo ./1-install_load_balancer         # run as root on lb-01
