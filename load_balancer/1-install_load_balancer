@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Configure a fresh Ubuntu machine: HAProxy round-robin load balancer in front of web-01 and web-02
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -y
+apt-get install -y haproxy
+cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
+cat > /etc/haproxy/haproxy.cfg <<'EOF'
+global
+	log /dev/log local0
+	log /dev/log local1 notice
+	user haproxy
+	group haproxy
+	daemon
+	maxconn 2000
+
+defaults
+	log global
+	mode http
+	option httplog
+	option dontlognull
+	timeout connect 5s
+	timeout client 30s
+	timeout server 30s
+
+frontend http_front
+	bind *:80
+	default_backend http_back
+
+backend http_back
+	balance roundrobin
+	server web-01 13.135.102.185:80 check
+	server web-02 35.179.186.89:80 check
+EOF
+grep -q '^ENABLED=1$' /etc/default/haproxy || echo 'ENABLED=1' >> /etc/default/haproxy
+haproxy -c -f /etc/haproxy/haproxy.cfg || exit 1
+service haproxy restart || {
+	service haproxy stop > /dev/null 2>&1
+	sleep 1
+	rm -f /run/haproxy.pid
+	service haproxy start
+}
