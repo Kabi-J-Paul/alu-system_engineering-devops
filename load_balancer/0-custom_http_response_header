@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Configure a fresh Ubuntu machine: nginx sends an X-Served-By header containing the server hostname
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -y
+apt-get install -y nginx
+cat > /etc/nginx/conf.d/x-served-by.conf <<'EOF'
+add_header X-Served-By $hostname;
+EOF
+nginx -t
+service nginx restart || {
+	service nginx stop > /dev/null 2>&1
+	sleep 1
+	rm -f /run/nginx.pid
+	service nginx start
+}
